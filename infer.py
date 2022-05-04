@@ -16,12 +16,12 @@ parser.add_argument(
 
 @torch.no_grad()
 def main():
-    args = parser.parse_args()
+    args = parser.parse_args()                  #passing arguments through parse_args()
     image_paths = [os.path.join(args.image_dir, x) for x in os.listdir(args.image_dir) if
-                   x.endswith('.png') or x.endswith('.jpg')]
+                   x.endswith('.png') or x.endswith('.jpg')]    #giving the image path
     model = Generator(ngf=32, n_residual_blocks=9)
     ckpt = torch.load('pretrained_model/state_dict.pth', map_location='cpu')
-    model.load_state_dict(ckpt)
+    model.load_state_dict(ckpt)                 #loading model
     model.eval()
     trans = transforms.Compose([
         transforms.Resize((512, 512)),
@@ -40,8 +40,8 @@ def main():
         #cv2.imshow('age img', aged_face)
         #ax[0, i].imshow((img.squeeze().permute(1, 2, 0).numpy() + 1.0) / 2.0)
         ax[0].imshow(aged_face)
-    plt.show()
-    plt.savefig("mygraph.png")
+    plt.show()     #diplaying the plt
+    plt.savefig("mygraph.png")      
 
 
 if __name__ == '__main__':
