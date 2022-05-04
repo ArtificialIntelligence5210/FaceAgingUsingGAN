@@ -2,7 +2,7 @@ from timeit import default_timer as timer
 
 import torch
 
-
+# we defined time_model function below
 def time_model(model, input_size):
     model.eval()
     count, duration = 0, 0
@@ -16,13 +16,14 @@ def time_model(model, input_size):
 
     return duration / count
 
-
+#This is the main function
 def main():
     from models import Generator
     model = Generator(32, 9)
+    #calling the time_model function
     duration = time_model(model, [1, 3, 512, 512])
     print("Time Taken (excluding warmup): ", duration)
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  
     main()
