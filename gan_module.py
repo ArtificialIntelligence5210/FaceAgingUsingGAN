@@ -117,7 +117,8 @@ class AgingGAN(pl.LightningModule):
                 'log': {'Loss/Discriminator': d_loss}
             }
             return output
-
+     # define optimizers and LR schedulers
+    
     def configure_optimizers(self):
         g_optim = torch.optim.Adam(itertools.chain(self.genA2B.parameters(), self.genB2A.parameters()),
                                    lr=self.hparams['lr'], betas=(0.5, 0.999),
@@ -128,7 +129,8 @@ class AgingGAN(pl.LightningModule):
                                    betas=(0.5, 0.999),
                                    weight_decay=self.hparams['weight_decay'])
         return [g_optim, d_optim], []
-
+   
+     #defining Datamodule
     def train_dataloader(self):
         train_transform = transforms.Compose([
             transforms.RandomHorizontalFlip(),
